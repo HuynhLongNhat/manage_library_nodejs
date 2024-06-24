@@ -6,8 +6,8 @@ const registerNewUser = async (req, res) => {
     try {
         if (
             !req.body.email ||
-            !req.body.userName ||
-            !req.body.phone ||
+            !req.body.name ||
+            !req.body.phonenumber ||
             !req.body.password
         ) {
             return res.status(200).json({
@@ -44,17 +44,7 @@ const registerNewUser = async (req, res) => {
 const handleLoginUser = async (req, res) => {
 
     try {
-        if (
-            !req.body.valueLogin ||
-            !req.body.password
 
-        ) {
-            return res.status(200).json({
-                EM: "Thiếu các trường bắt buộc!",
-                EC: "1",
-                DT: "",
-            })
-        }
         // create new user
         let data = await LoginRegisterService.handleLoginUser(req.body);
 

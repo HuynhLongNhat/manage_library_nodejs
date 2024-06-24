@@ -15,6 +15,11 @@ const getAllRequest = async () => {
                     as: "readerData",
                     attributes: ["name", "id"]
                 },
+                {
+                    model: db.libraryStaff,
+                    as: "libraryStaffData",
+                    attributes: ["name", 'id']
+                },
             ],
             raw: false,
             nest: true,
@@ -46,11 +51,15 @@ const getAllRequest = async () => {
 
 const createNewRequest = async (data) => {
 
+
     try {
         let request = await db.borrowingRecord.create({
             readerId: data.readerId,
             bookId: data.bookId,
-            quantity: data.quantity
+            quantity: data.quantity,
+            borrowDate: data.borrowDate,
+            returnDate: data.returnDate,
+            staffId: data.staffId,
         });
         if (request) {
             return {
@@ -71,16 +80,18 @@ const createNewRequest = async (data) => {
 
 
 
-const updateUser = async (data) => {
+const updateRequest = async (data) => {
     try {
 
 
         //update
-        let res = await db.reader.update({
-            code: data.code,
-            name: data.name,
-            address: data.address,
-            gender: data.gender,
+        let res = await db.borrowingRecord.update({
+            readerId: data.readerId,
+            bookId: data.bookId,
+            quantity: data.quantity,
+            borrowDate: data.borrowDate,
+            returnDate: data.returnDate,
+            staffId: data.staffId,
 
         }, {
             where: {
@@ -92,7 +103,7 @@ const updateUser = async (data) => {
         if (res) {
 
             return {
-                EM: 'Cập nhật người dùng thành công',
+                EM: 'Cập nhật yêu cầu thành công',
                 EC: 0,
                 DT: ""
             }
@@ -108,11 +119,11 @@ const updateUser = async (data) => {
     }
 };
 
-const deleteUser = async (id) => {
+const returnBook = async (id) => {
 
-    console.log('id', id)
+
     try {
-        let data = await db.reader.findOne({
+        let data = await db.borrowingRecord.findOne({
             where: {
                 id: id
             }
@@ -124,14 +135,14 @@ const deleteUser = async (id) => {
                 DT: {}
             })
         }
-        await db.reader.destroy({
+        await db.borrowingRecord.destroy({
             where: {
                 id: id
             }
         })
         return ({
             EC: 0,
-            EM: "Xóa người dùng thành công!",
+            EM: "Xác nhận trả sách thành công!",
             DT: {}
         })
     } catch (error) {
@@ -149,6 +160,6 @@ module.exports = {
 
     getAllRequest,
     createNewRequest,
-    updateUser,
-    deleteUser,
+    updateRequest,
+    returnBook,
 };

@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      libraryStaff.hasMany(models.borrowingRecord,
+        {
+          foreignKey: 'staffId',
+          as: "libraryStaffData"
+        });
     }
   };
   libraryStaff.init({
@@ -19,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
     gender: DataTypes.STRING,
-    username: DataTypes.STRING,
+    admin: DataTypes.BOOLEAN,
+
     password: DataTypes.STRING
   }, {
     sequelize,

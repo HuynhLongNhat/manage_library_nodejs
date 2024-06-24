@@ -61,9 +61,9 @@ const createNewStaff = async (data) => {
 
         let libraryStaff = await db.libraryStaff.create({
             name: data.name,
-            username: data.username,
             password: hashPassword,
             phone: data.phone,
+            admin: 1,
             email: data.email,
             address: data.address,
             gender: data.gender,
@@ -94,7 +94,7 @@ const updateStaff = async (data) => {
         //update
         let res = await db.libraryStaff.update({
             name: data.name,
-            username: data.username,
+
             address: data.address,
             gender: data.gender,
 

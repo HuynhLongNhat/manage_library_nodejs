@@ -38,7 +38,7 @@ const createNewUser = async (data) => {
 
 
         let reader = await db.reader.create({
-            code: data.code,
+
             name: data.name,
             phone: data.phone,
             email: data.email,
@@ -69,7 +69,7 @@ const updateUser = async (data) => {
     try {
         //update
         let res = await db.reader.update({
-            code: data.code,
+
             name: data.name,
             address: data.address,
             gender: data.gender,

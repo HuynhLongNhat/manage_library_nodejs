@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   reader.init({
-    code: DataTypes.STRING,
+
     name: DataTypes.STRING,
     address: DataTypes.STRING,
     email: DataTypes.STRING,

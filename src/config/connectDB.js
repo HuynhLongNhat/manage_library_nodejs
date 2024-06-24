@@ -3,6 +3,7 @@ const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize("library_management", "root", null, {
     host: "localhost",
     dialect: "mysql",
+
 });
 
 const connection = async () => {

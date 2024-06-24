@@ -20,7 +20,7 @@ const readFunc = async (req, res) => {
     }
 };
 const createFunc = async (req, res) => {
-    console.log("data :", req.file)
+
     try {
         let data = await bookService.createNewBook(req.body);
 
@@ -58,8 +58,9 @@ const updateFunc = async (req, res) => {
     }
 };
 const deleteFunc = async (req, res) => {
+
     try {
-        let data = await bookService.deleteBook(req.body.id);
+        let data = await bookService.deleteBook(req.params.id);
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,

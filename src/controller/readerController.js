@@ -20,6 +20,7 @@ const readFunc = async (req, res) => {
     }
 };
 const createFunc = async (req, res) => {
+
     try {
         let data = await readerService.createNewUser(req.body);
 
@@ -59,7 +60,7 @@ const updateFunc = async (req, res) => {
 const deleteFunc = async (req, res) => {
 
     try {
-        let data = await readerService.deleteUser(req.body.id);
+        let data = await readerService.deleteUser(req.params.id);
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,

@@ -58,7 +58,7 @@ const updateFunc = async (req, res) => {
 };
 const deleteFunc = async (req, res) => {
     try {
-        let data = await libraryStaffService.deleteStaff(req.body.id);
+        let data = await libraryStaffService.deleteStaff(req.params.id);
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,

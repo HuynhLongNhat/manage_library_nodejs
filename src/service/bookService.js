@@ -1,18 +1,25 @@
 import db from "../models/index"
+
 const getAllBook = async () => {
     try {
-        let book = await db.book.findAll({
+        let data = await db.book.findAll({
             order: [["id", "DESC"]],
 
         });
 
-        if (book) {
+        if (data && data.length > 0) {
+            data.map((item) => {
+                item.image = new Buffer(item.image, "base64").toString("binary");
+                return item;
+            })
             return {
-                EM: "Tải danh sách sách  thành công!",
+                EM: 'Ok',
                 EC: 0,
-                DT: book,
-            };
-        } else {
+                DT: data
+
+            }
+        }
+        else {
             return {
                 EM: "Danh sách trống!",
                 EC: -1,
@@ -30,22 +37,22 @@ const getAllBook = async () => {
 };
 
 
-const createNewBook = async (data,) => {
+const createNewBook = async (data) => {
+    // console.log('data :', data)
     try {
-
 
         let book = await db.book.create({
             name: data.name,
             author: data.author,
             genre: data.genre,
-
             publicYear: data.publicYear,
             quantity: data.quantity,
+            image: data.image
 
         });
         if (book) {
             return {
-                EM: "Tạo mới người dùng thành công!",
+                EM: "Thêm sách mới thành công!",
                 EC: 0,
                 DT: [],
             };
@@ -70,6 +77,7 @@ const updateBook = async (data) => {
             genre: data.genre,
             publicYear: data.publicYear,
             quantity: data.quantity,
+            image: data.image
 
         },
 
@@ -109,7 +117,7 @@ const deleteBook = async (id) => {
         if (!data) {
             return ({
                 EC: 2,
-                EM: "Người dùng không tổn tại!",
+                EM: "Sách không tổn tại!",
                 DT: {}
             })
         }
@@ -120,7 +128,7 @@ const deleteBook = async (id) => {
         })
         return ({
             EC: 0,
-            EM: "Xóa người dùng thành công!",
+            EM: "Xóa sách thành công!",
             DT: {}
         })
     } catch (error) {

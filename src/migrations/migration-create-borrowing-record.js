@@ -1,14 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.changeColumn('borrowingRecords', 'readerId', {
-      type: Sequelize.INTEGER, // hoặc BIGINT tùy thuộc vào kiểu dữ liệu của trường "code" trong bảng "Readers"
-      allowNull: false,
-      references: {
-        model: 'reader',
-        key: 'code'
-      }
-    });
+
     await queryInterface.createTable('borrowingRecords', {
       id: {
         allowNull: false,
@@ -49,13 +42,6 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('borrowingRecords');
-    await queryInterface.changeColumn('borrowingRecords', 'readerId', {
-      type: Sequelize.STRING, // hoặc kiểu dữ liệu ban đầu
-      allowNull: false,
-      references: {
-        model: 'Readers',
-        key: 'id'
-      }
-    });
+
   }
 };

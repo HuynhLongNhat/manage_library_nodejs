@@ -23,9 +23,11 @@ module.exports = {
       gender: {
         type: Sequelize.STRING
       },
-      username: {
-        type: Sequelize.STRING
+      admin: {
+        type: Sequelize.BOOLEAN,
+
       },
+
       password: {
         type: Sequelize.STRING
       },

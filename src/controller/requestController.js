@@ -41,7 +41,7 @@ const createFunc = async (req, res) => {
 const updateFunc = async (req, res) => {
 
     try {
-        let data = await requestService.updateUser(req.body);
+        let data = await requestService.updateRequest(req.body);
 
         return res.status(200).json({
             EM: data.EM,
@@ -58,9 +58,9 @@ const updateFunc = async (req, res) => {
     }
 };
 const deleteFunc = async (req, res) => {
-
+    console.log('data :', req.body.id)
     try {
-        let data = await requestService.deleteUser(req.body.id);
+        let data = await requestService.returnBook(req.params.id);
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,

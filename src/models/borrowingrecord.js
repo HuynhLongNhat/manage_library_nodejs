@@ -23,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
 
           as: "readerData"
         });
+      borrowingRecord.belongsTo(models.libraryStaff,
+        {
+          foreignKey: 'staffId',
+
+          as: "libraryStaffData"
+        });
 
     }
   };
